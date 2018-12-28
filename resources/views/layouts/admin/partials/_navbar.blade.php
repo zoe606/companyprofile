@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="#">{{ config('app.name', 'CompanyProfile') }}</a>
+    <a class="navbar-brand" href="{{ route('home')}} ">{{ config('app.name', 'CompanyProfile') }}</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('home')}}">
             <i class="fa fa-fw fa-home"></i>
             <span class="nav-link-text">Dashboard</span>
             </a>
@@ -18,10 +18,10 @@
             </a>
             <ul class="sidenav-second-level collapse" id="collapseMulti">
             <li>
-                <a href="#">All Posts</a>
+                <a href="{{ route('admin.posts.index') }}">All Posts</a>
             </li>
             <li>
-                <a href="#">Add New</a>
+            <a href="{{ route('admin.posts.create') }}">Add New</a>
             </li>
             <li>
                 <a href="{{ route('admin.categories.index') }}">Categories</a>
