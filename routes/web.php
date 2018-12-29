@@ -1,12 +1,9 @@
 <?php
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/blog', function () {
-    return view('blog');
-});
+Route::get('/', 'IndexController@index');
+Route::get('/blog', 'IndexController@blog');
+Route::get('/blog/{slug}', 'IndexController@show');
+Route::post('/blog/{slug}/comment', 'IndexController@comment')->name('post.comment');
 
 // Auth::routes();
 
