@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
+use Auth;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:author, admin', [
+            'only' => [
+                'index', 'create', 'store', 'show','edit', 'update', 'delete'
+                ]
+            ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -75,7 +84,10 @@ class PostsController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        return view('admin.posts.edit', compact('post'));        
+        if(Auth::user()->role == 'admin' || Auth::user()->id == $post->user_id) {
+            return view('admin.posts.edit', compact('post'));
+        } 
+        return redirect('admin');       
     }
 
     /**
@@ -87,22 +99,28 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // validasi
-        // memanggil method validate yang ada di controller
-        $this->validate($request, [
-            'category_id' => 'required',
-            'title' => 'required|string|min:5|unique:posts,title,' . $id,
-            'body' => 'required|min:20',
-            'status' => 'required',
-            'published_at' => 'required'
-        ]);
-
-        $request['slug'] = str_slug($request->get('title'), '-');
-
         $post = Post::findOrFail($id);    
-        $post->update($request->all());
+        if(Auth::user()->role == 'admin' || Auth::user()->id == $post->user_id) {
+            // validasi
+            // memanggil method validate yang ada di controller
+            $this->validate($request, [
+                'category_id' => 'required',
+                'title' => 'required|string|min:5|unique:posts,title,' . $id,
+                'body' => 'required|min:20',
+                'status' => 'required',
+                'published_at' => 'required'
+            ]);
 
-        return redirect()->route('admin.posts.index');
+            $request['slug'] = str_slug($request->get('title'), '-');
+
+            $post->update($request->all());
+
+            return redirect()->route('admin.posts.index');
+           
+        } 
+
+        return redirect('admin');
+     
     }
 
     /**
@@ -113,9 +131,15 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        Post::destroy($id);
-        if (! Post::destroy($id)) return redirect()->back();
-        return redirect()->route('admin.posts.index');
+        $post = Post::findOrFail($id);
+        
+        if(Auth::user()->role == 'admin' || Auth::user()->id == $post->user_id) {
+            if (! Post::destroy($id)) return redirect()->back();
+            return redirect()->route('admin.posts.index');
+        } 
+
+        return redirect('admin');
+       
     }
 
     public function dataTable()
