@@ -4,6 +4,9 @@ Route::get('/', 'IndexController@index');
 Route::get('/blog', 'IndexController@blog');
 Route::get('/blog/{slug}', 'IndexController@show');
 Route::post('/blog/{slug}/comment', 'IndexController@comment')->name('post.comment');
+Route::get('/blog/category/{slug}', 'IndexController@blogCategory');
+Route::get('/search', 'IndexController@blogSearch');
+
 
 // Auth::routes();
 

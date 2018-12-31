@@ -28,7 +28,7 @@
                                 {!! substr($post->body, 0, 150) !!} ...
 
                                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                                    <div class="avatar"><img src="{{ asset($post->avatar) }}" alt="..." class="img-fluid"></div>
+                                    <div class="avatar"><img src="{{ asset($post->user->avatar) }}" alt="..." class="img-fluid"></div>
                                 <div class="title"><span>{{ $post->user->name }}</span></div></a>
                                 <div class="date"><i class="icon-clock"></i>{{ $post->published_at }}</div>
                                     <div class="comments meta-last"><i class="icon-comment"></i>{{ $post->comments()->count() }}</div>
@@ -42,7 +42,7 @@
                 </div>
                 <!-- Pagination -->
                 <nav aria-label="Page navigation example">
-                    {!! $posts->links('layouts.blog.partials._pagination') !!}
+                    {!! $posts->appends(request()->query())->links('layouts.blog.partials._pagination') !!}
                 </nav>
             </div>
         </main>

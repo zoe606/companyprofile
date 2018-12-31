@@ -6,7 +6,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-7">
-          <h1>Company Profile<br> Project By Laravel</h1><a href="#" class="hero-link">Discover More</a>
+        <h1>Company Profile<br> Project By Laravel</h1><a href="" class="hero-link">Discover More</a>
         </div>
       </div><a href=".intro" class="continue link-scroll"><i class="fa fa-long-arrow-down"></i> Scroll Down</a>
     </div>
@@ -34,7 +34,7 @@
                     <div class="text-inner d-flex align-items-center">
                     <div class="content">
                         <header class="post-header">
-                        <div class="category"><a href="#">{{ $post->category->title }}</a></div>
+                        <div class="category"><a href="{{ url('/blog/category/' . $post->category->slug) }}">{{ $post->category->title }}</a></div>
                         <a href="{{ url('/blog/'. $post->slug)}}">
                         <h2 class="h4">{{ $post->title }}</h2>
                         </a>

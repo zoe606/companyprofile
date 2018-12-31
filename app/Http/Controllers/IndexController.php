@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Setting;
 use App\Comment;
+use App\Category;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -25,18 +26,30 @@ class IndexController extends Controller
         return view('blog', compact('setting', 'posts'));
     }
 
+    public function blogCategory($slug) {
+        $setting = $this->setting();
+        $category = Category::where('slug', $slug)->first();
+        $posts = $category->posts()->where('status', 1)->orderBy('published_at', 'DESC')->paginate(4);
+        return view('blog', compact('setting', 'posts'));
+    }
+
+    public function blogSearch(Request $request) {
+        $setting = $this->setting();
+
+        // method dari lara scout
+        $posts = Post::search($request->get('q'))->where('status', 1)->orderBy('published_at', 'DESC')->paginate(4);
+        return view('blog', compact('posts', 'setting'));
+    }
+
     public function show($slug) {
         $setting = $this->setting();
-        $posts = Post::where('status', 1);
         $post = Post::where('slug', $slug)->first();
-
         $prev = Post::where('id', '<', $post->id)
                 ->latest('id')
                 ->first();
         $next = Post::where('id', '>', $post->id)
-                ->first(); 
-
-        return view('show', compact('setting', 'post', 'posts', 'prev', 'next'));
+                ->first();
+        return view('show', compact('setting', 'post', 'prev', 'next'));
     }
 
     public function comment( Request $request, $slug) {
