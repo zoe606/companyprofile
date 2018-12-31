@@ -27,6 +27,7 @@ Route::resource('/admin/users', 'UsersController', ['as' => 'admin']);
 // array as (prefix) befungsi untuk menampilkan semua haman menjadi awalan admin.NamaController.NamaFile
 Route::resource('/admin/categories', 'CategoriesController', ['as' => 'admin']);
 Route::resource('/admin/posts', 'PostsController', ['as' => 'admin']);
+Route::resource('/admin/comments', 'CommentsController', ['as' => 'admin', 'except' => ['create', 'store']]);
 
 Route::get('admin/settings', 'SettingsController@index')->name('admin.settings.index');
 Route::post('admin/settings', 'SettingsController@store')->name('admin.settings.store');
@@ -35,4 +36,5 @@ Route::post('admin/settings', 'SettingsController@store')->name('admin.settings.
 Route::get('/api/datatable/users', 'UsersController@dataTable')->name('api.datatable.users');
 Route::get('/api/datatable/categories', 'CategoriesController@dataTable')->name('api.datatable.categories');
 Route::get('/api/datatable/posts', 'PostsController@dataTable')->name('api.datatable.posts');
+Route::get('/api/datatable/comments', 'CommentsController@dataTable')->name('api.datatable.comments');
 

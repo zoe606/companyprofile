@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     <meta name="description" content="Company Profile Project">
-    <meta name="author" content="https://idstack.net">    
-    <title>{{ config('app.name', 'Company Profile') }} - Company Profile Project</title>
+    <meta name="author" content="librantara">    
+    <title>{{ config('app.name', 'Company Profile') }} - Company Profile </title>
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="{{ asset('assets/blog/vendor/bootstrap/css/bootstrap.min.css') }}">
     <!-- Font Awesome CSS-->
