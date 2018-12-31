@@ -4,6 +4,7 @@ namespace App;
 
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Post extends Model
 {
@@ -11,6 +12,10 @@ class Post extends Model
 
     protected $fillable = [
         'user_id', 'category_id', 'slug', 'title', 'body', 'featured', 'status', 'published_at'
+    ];
+
+    protected $dates = [
+        'published_at', 'created_at', 'updated_at'
     ];
 
     public function user()
@@ -32,5 +37,10 @@ class Post extends Model
     public function searchableAs()
     {
         return 'posts_index';
+    }
+
+    public function getDateAttribute()
+    {
+        return Carbon::parse($this->published_at)->diffForHumans();
     }
 }
