@@ -34,12 +34,19 @@
             <span class="nav-link-text">Comments</span>
             </a>
         </li>
+       
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Users">
             <a class="nav-link" href=" {{ route('admin.users.index') }}">
             <i class="fa fa-fw fa-users"></i>
             <span class="nav-link-text">Users</span>
             </a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Abouts">
+            <a class="nav-link" href="{{ route('admin.abouts.index') }}">
+                <i class="fa fa-id-card-o"></i>
+                <span class="nav-link-text">Abouts</span>
+                </a>
+            </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Settings">
         <a class="nav-link" href="{{ route('admin.settings.index')}}">
             <i class="fa fa-fw fa-gears"></i>

@@ -26,7 +26,9 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item"><a href="{{ url('/') }}" class="nav-link active ">Home</a>
         </li>
-        <li class="nav-item"><a href="{{ url('/blog') }}" class="nav-link ">Blog</a>
+        <li class="nav-item"><a href="{{ url('/about') }}" class="nav-link active ">About Us</a>
+        </li>
+        <li class="nav-item"><a href="{{ url('/blog') }}" class="nav-link active">Blog</a>
         </li>
       </ul>
       <div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div>

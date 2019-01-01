@@ -11,7 +11,7 @@ class PostsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:author, admin', [
+        $this->middleware('role:admin,author', [
             'only' => [
                 'index', 'create', 'store', 'show','edit', 'update', 'delete'
                 ]

@@ -6,6 +6,7 @@ use App\Post;
 use App\Setting;
 use App\Comment;
 use App\Category;
+use App\About;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -18,6 +19,13 @@ class IndexController extends Controller
         $setting = $this->setting();
         $posts = Post::where('status', 1)->orderBy('published_at', 'DESC')->limit(3)->get();
         return view('welcome', compact('setting', 'posts'));
+    }
+
+    public function about() {
+        $setting = $this->setting();
+        $abouts = About::get();
+        
+        return view('about', compact('setting', 'abouts'));
     }
 
     public function blog() {
